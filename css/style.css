@@ -1365,11 +1365,11 @@ body.shot > #opening { visibility: visible !important; }
 /* opening title card: the event, then the challenge, like the start of a film */
 #opening .op-card { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; pointer-events: none; }
 #opening .op-card > p { grid-area: 1 / 1; margin: 0; text-align: center; opacity: 0; }
-#opening .oc-1 { display: grid; justify-items: center; gap: 10px; transform: scale(.97); filter: blur(6px); transition: opacity 1.1s ease, transform 3.4s cubic-bezier(.2,.7,.2,1), filter 1.1s ease; }
-#opening .oc-1 span { font-family: 'Archivo Narrow', var(--ui); font-weight: 600; font-size: clamp(22px, 3.6vw, 50px); letter-spacing: .32em; text-transform: uppercase; color: #dfe7f1; padding-left: .32em; }
-#opening .oc-1 b { font-family: 'Cinzel', 'Trajan Pro', var(--read); font-weight: 700; font-size: clamp(54px, 10vw, 150px); line-height: .9; letter-spacing: .12em; padding-left: .12em;
+#opEvent .oc-1 { display: grid; justify-items: center; gap: 10px; transform: scale(.97); filter: blur(6px); transition: opacity 1.1s ease, transform 3.4s cubic-bezier(.2,.7,.2,1), filter 1.1s ease; }
+#opEvent .oc-1 span { font-family: 'Archivo Narrow', var(--ui); font-weight: 600; font-size: clamp(22px, 3.6vw, 50px); letter-spacing: .32em; text-transform: uppercase; color: #dfe7f1; padding-left: .32em; }
+#opEvent .oc-1 b { font-family: 'Cinzel', 'Trajan Pro', var(--read); font-weight: 700; font-size: clamp(54px, 10vw, 150px); line-height: .9; letter-spacing: .12em; padding-left: .12em;
   background: linear-gradient(180deg, #fff6dc 0%, #ffd27a 55%, #b8862e 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 4px 30px rgba(255, 196, 90, .25)); }
-#opening .op-card.a .oc-1 { opacity: 1; transform: scale(1); filter: none; }
+#opEvent.a .oc-1 { opacity: 1; transform: scale(1); filter: none; }
 #opening .oc-2 { display: flex; flex-direction: column; align-items: center; gap: clamp(6px, 1.2vw, 14px); padding: 0 4vw; font-family: 'Cinzel', 'Trajan Pro', var(--read); font-weight: 700; font-size: clamp(30px, 5.6vw, 84px); line-height: 1.05; letter-spacing: .5em; text-transform: uppercase;
   background: linear-gradient(180deg, #ffffff 0%, #f3e3bd 60%, #c9a35a 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
   transition: opacity 1.2s ease, letter-spacing 3.6s cubic-bezier(.15,.75,.2,1); }
@@ -1377,4 +1377,10 @@ body.shot > #opening { visibility: visible !important; }
 #opening .oc-2 span:first-of-type { font-size: .62em; letter-spacing: .3em; padding-left: .3em; }
 #opening .op-card.b .oc-2 { opacity: 1; letter-spacing: .08em; }
 @media (max-width: 760px) { #opening .oc-2 { letter-spacing: .3em; } #opening .op-card.b .oc-2 { letter-spacing: .05em; } }
-@media (prefers-reduced-motion: reduce) { #opening .oc-1, #opening .oc-2 { transition: opacity 1s ease; } }
+@media (prefers-reduced-motion: reduce) { #opEvent .oc-1, #opening .oc-2 { transition: opacity 1s ease; } }
+
+#opEvent { position: fixed; inset: 0; z-index: 401; display: grid; place-items: center; pointer-events: none; }
+#opEvent .oc-1 { margin: 0; text-align: center; opacity: 0; }
+#opEvent .oc-1 span { text-shadow: 0 2px 24px rgba(0,0,0,.85); }
+body.shot > #opEvent { visibility: visible !important; }
+#opening .oc-2 { filter: drop-shadow(0 3px 18px rgba(0,0,0,.9)); }

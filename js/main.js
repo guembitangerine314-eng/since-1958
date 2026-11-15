@@ -104,6 +104,7 @@ function openingSwing(onReveal) {
   const dir = rig.orbitDir('earth', GC_DIR).applyAxisAngle(new THREE.Vector3(0, 1, 0), FINAL_TURN);
   if (!rig.swingTo(dir, FINAL_DIST_R, 5.2)) return false;
   document.body.classList.add('shot', 'opening');
+  if (wantFilm) setTimeout(() => { if (rig.swing) opening.eventTitle(true); }, 500);   // the event's name over the Milky Way
   let shown = false;
   const watch = () => {
     const w = rig.swing;
@@ -121,7 +122,7 @@ function openingSwing(onReveal) {
   // after Start the opening film plays first (time stands still meanwhile); the windows come in when it ends
   const reveal = () => {
     const calm = rig.mode === 'orbit' && rig.bodyId === 'earth' && !rig.flying && !rig.photo && !viewer.isOpen && !museum.isOpen && !anyFilm() && !news.isOpen;
-    if (!wantFilm || !calm) { show(); return; }
+    if (!wantFilm || !calm) { opening.eventTitle(false); show(); return; }
     wantFilm = false; clock.holds++;
     opening.play(() => { clock.holds = Math.max(0, clock.holds - 1); show(); });
   };

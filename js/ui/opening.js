@@ -17,7 +17,7 @@ import { EQUIPMENT } from '../../data/equipment.js';
 import { PROBES } from '../../data/probes.js';
 import { AU_KM } from '../config.js';
 
-const CARD = 7.6, PRE = 5.5, LEN = 40, GOLD = '#ffd27a', GREY = '#56606e';
+const PRE = 5.5, LEN = 40, GOLD = '#ffd27a', GREY = '#56606e';
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const ease = (x) => { x = clamp(x); return x * x * (3 - 2 * x); };
 const seg = (t, a, b) => ease((t - a) / (b - a));
@@ -64,7 +64,7 @@ function loadWorlds(m) {
 export function setupOpening() {
   const el = document.createElement('div'); el.id = 'opening'; el.hidden = true;
   el.innerHTML = `<canvas class="op-3d"></canvas><canvas class="op-map"></canvas><div class="op-film"></div>
-    <div class="op-card" aria-hidden="true"><p class="oc-1"><span>NASA Space Apps Challenge</span><b>2026</b></p><p class="oc-2"><i></i><span>Abandoned,</span><span>but not Forgotten</span><i></i></p></div>
+    <div class="op-card" aria-hidden="true"><p class="oc-2"><i></i><span>Abandoned,</span><span>but not Forgotten</span><i></i></p></div>
     <p class="op-place"><b>Tranquility Base, the Moon</b><span></span></p>
     <p class="op-count" hidden></p>
     <p class="op-cap"></p>
@@ -72,6 +72,10 @@ export function setupOpening() {
     <p class="op-fine">Directions from the Sun are real for today. Sizes and distances are compressed.</p>
     <button class="op-skip" title="Skip ( Tab )">Skip ▸▸</button>`;
   document.body.appendChild(el);
+  // the event's name, shown over the Milky Way while the view turns, before the film (see main.js)
+  const ev = document.createElement('div'); ev.id = 'opEvent'; ev.setAttribute('aria-hidden', 'true');
+  ev.innerHTML = '<p class="oc-1"><span>NASA Space Apps Challenge</span><b>2026</b></p>';
+  document.body.appendChild(ev);
   const $ = (s) => el.querySelector(s);
   const c3 = $('.op-3d'), cm = $('.op-map'), g = cm.getContext('2d');
   const moonTex = new THREE.TextureLoader().load('textures/moon_4k.jpg'); moonTex.colorSpace = THREE.SRGBColorSpace;
@@ -358,14 +362,12 @@ export function setupOpening() {
   function frame(nowMs) {
     if (!open) return;
     raf = requestAnimationFrame(frame);
-    const rawAll = hold != null ? hold : (nowMs - t0) / 1000;
-    // a title card first, as in a cinema: the event, then the challenge; the film proper starts after it
-    const card = $('.op-card'); card.classList.toggle('a', rawAll > 0.35 && rawAll < 3.3); card.classList.toggle('b', rawAll > 3.7 && rawAll < 6.4);
-    const raw = rawAll - CARD, t = raw - PRE;                          // t: the film proper, after the fall to the Moon
+    const raw = hold != null ? hold : (nowMs - t0) / 1000, t = raw - PRE;                          // t: the film proper, after the fall to the Moon
+    $('.op-card').classList.toggle('b', raw > 0.9 && raw < 4.6);          // the challenge's name, as the Moon comes up
     if (t >= LEN + 0.9) { finish(); return; }
     const fadeIn = seg(raw, 0, 1.4), cross = seg(t, 11.2, 12.4), dip = 1 - 0.92 * Math.max(0, 1 - Math.abs(raw - PRE) / 0.45);
     c3.style.opacity = (fadeIn * dip * (1 - cross)).toFixed(3); cm.style.opacity = cross.toFixed(3);
-    if (t < 12.5 && R) R.draw(Math.max(0, raw)); else if (R) { R.dispose(); R = null; }
+    if (t < 12.5 && R) R.draw(raw); else if (R) { R.dispose(); R = null; }
     let n = 0; if (t > 11) n = drawMap(Math.max(12, t));
     // words
     let ci = -1; CAPS.forEach((c, i) => { if (t >= c[0] && t < c[1]) ci = i; });
@@ -400,10 +402,12 @@ export function setupOpening() {
       open = true; hold = null; capI = -2; cntHtml = ''; el.hidden = false; el.style.opacity = '1'; c3.style.opacity = '0'; cm.style.opacity = '0';
       $('.op-place span').textContent = new Date().getUTCFullYear(); $('.op-year').textContent = new Date().getUTCFullYear();
       ['.op-title', '.op-cap', '.op-place', '.op-fine'].forEach((s) => $(s).classList.remove('on', 'h', 'turn'));
-      $('.op-card').classList.remove('a', 'b');
+      $('.op-card').classList.remove('b'); ev.classList.remove('a');      // the event's name fades out on the black
       t0 = performance.now(); raf = requestAnimationFrame(frame);
     },
     skip: finish,
+    /** show or hide the event's name over the turning view */
+    eventTitle(on) { ev.classList.toggle('a', !!on); },
     seek(sec) { t0 = performance.now() - sec * 1000; },
     freeze(sec) { hold = sec; },                        // (for checking one moment of the film)
   };

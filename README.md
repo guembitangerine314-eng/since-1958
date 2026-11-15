@@ -92,7 +92,7 @@ This is a student project for the NASA Space Apps Challenge. It is not an offici
 ## 👩‍🚀 Team Concinendial
 
 1. **Semin Cheon**, Garden International School, 10M (Managing Head)
-2. **Ian Lee**, Garden International School, 10M.(Team Leader)
+2. **Ian Lee**, Garden International School, 10M (Team Leader)
 3. **Junyi Chai**, Garden International School, 11W (Advisor for mobile experience)
 
 <div align="center">

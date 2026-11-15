@@ -30,7 +30,7 @@ Most of the machines we sent into space never came home. Their stories are scatt
 | | |
 |---|---|
 | 🕰️ **One clock, 1958 → today** | 83 events on a timeline. The Sun, planets and Moon are computed for every moment, at true size and distance. |
-| 📍 **Every site, at its real place** | 24 landing and impact sites on the Moon and Mars, and 11 deep-space probes, each at its real coordinates. |
+| 📍 **Every site, at its real place** | 24 landing and impact sites on the Moon and Mars, each at its real latitude and longitude, and 11 probes in deep space. |
 | 🎬 **Watch each one land** | 30 short mission films, plus 4 featured animations: Apollo 11 from pad to Tranquility Base, Voyager 1 up close, Perseverance's seven minutes, and how James Webb works. |
 | 🚶 **Walk right up to it** | Walk the Apollo sites in the Moon's real gravity, and follow Curiosity, Perseverance and Ingenuity along NASA/JPL's published routes. |
 | 🏛️ **Virtual exhibition** | A clean-room hall with 44 exhibits at true size. Walk, jump, and take each machine apart piece by piece. |

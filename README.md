@@ -124,7 +124,7 @@ This is a student project for the NASA Space Apps Challenge 2026 and is not an o
 
 ## Licence
 
-Our code is released under the [MIT licence](LICENSE). Third-party material (NASA images and models, Solar System Scope maps, fonts and the libraries in `vendor/`) keeps its own licence, as listed in the LICENSE file.
+Our code is released under the [MIT licence](LICENSE). Third-party material (NASA images and models, Solar System Scope maps, fonts and the libraries in `vendor/`) keeps its own licence, as listed in [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Team Concinendial
 

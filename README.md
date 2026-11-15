@@ -122,6 +122,10 @@ Then open http://localhost:8000.
 
 This is a student project for the NASA Space Apps Challenge 2026 and is not an official NASA website.
 
+## Licence
+
+Our code is released under the [MIT licence](LICENSE). Third-party material (NASA images and models, Solar System Scope maps, fonts and the libraries in `vendor/`) keeps its own licence, as listed in the LICENSE file.
+
 ## Team Concinendial
 
 1. **Semin Cheon**, Garden International School, 10M (Managing Head)
